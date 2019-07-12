@@ -1,3 +1,5 @@
+/*MPK - Copyright 2019 Joshua Barrett
+  This software is BSD Licensed.*/
 #ifndef MPK_H
 #define MPK_H
 #include <stdint.h>
