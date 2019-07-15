@@ -94,7 +94,7 @@ typedef struct {
 	int64_t i64;
 	float f32;
 	double f64;
-	int8_t bool;
+	int8_t boole; //urrrgh. C++ made me do this and I resent it.
 	int8_t nil;
 	mpk_collection_t col;
 	mpk_blob_t blob;

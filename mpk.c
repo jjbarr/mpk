@@ -284,7 +284,7 @@ int MPK_ElemAt(mpk_msg_t *a, uint8_t off, mpk_value_t* out){
 	    if(out->value.col.off == 0) return 0;
 	}else if(MPK_ISBOOL(*p)){
 	    out->type = MPK_BOOL;
-	    out->value.bool = (*p==MPK_T);
+	    out->value.boole = (*p==MPK_T);
 	}else if(MPK_ISNIL(*p)){
 	    out->type = MPK_NIL;
 	    out->value.nil = 0;
@@ -366,6 +366,10 @@ int MPK_FindInMap(mpk_collection_t *map, mpk_value_t *k, mpk_value_t *v){
 	if(k->type == v->type){
 	    int eq = 0;
 	    if(k->type == MPK_BLOB){
+		//we use the data pointer here
+		//because k may be an "artificial" value_t.
+		//That is, a value_t created by the caller that isn't
+		//actually inside of the msg.
 		eq = (k->value.blob.size == v->value.blob.size
 		      && !memcmp(k->value.blob.type, v->value.blob.type, 2)
 		      && !memcmp(k->value.blob.data, v->value.blob.data,
@@ -378,7 +382,7 @@ int MPK_FindInMap(mpk_collection_t *map, mpk_value_t *k, mpk_value_t *v){
 		/*ENDMACRO*/
 		
 		switch(k->type){
-		    EQUALAS(MPK_BOOL, bool);
+		    EQUALAS(MPK_BOOL, boole);
 		    EQUALAS(MPK_NIL, nil);
 		    EQUALAS(MPK_F32, f32);
 		    EQUALAS(MPK_F64, f64);
